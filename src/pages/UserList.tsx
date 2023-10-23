@@ -3,11 +3,11 @@ import { getAllUsers } from "../store/selector/user.selector";
 import { updateInfo, softDeleteUser } from "../store/slices/user.slice";
 import { Link } from "@mui/material";
 import { Link as RouterLink } from 'react-router-dom';
-import Admin from "../models/User";
+import User from "../models/User";
 
 const UserList = () => {
   const dispatch = useDispatch();
-  const users: Admin[] = useSelector(getAllUsers);
+  const users: User[] = useSelector(getAllUsers);
 
   const handleSoftDelete = (UserID: string) => {
     const isConfirmed = window.confirm('Are you sure you want to delete?');
@@ -17,8 +17,19 @@ const UserList = () => {
     }
   }
 
-  const handleRoleChange = (id: number, targetStatus: string) => {
-    dispatch(updateInfo({id, targetStatus}))
+type userRole = 'admin' | 'user';
+
+  const handleRoleChange = (id: string, newRole: userRole) => {
+    const user = users.find(user => user.userid === id);
+
+    if (user) {
+
+      const updatedUser = new User(user.userid, user.username, user.email, user.password);
+      updatedUser.role = newRole;
+      dispatch(updateInfo({id, AdminFormDetail: updatedUser}))
+    }
+    
+    
   }
 
   return (
@@ -45,7 +56,7 @@ const UserList = () => {
               <td>{user.email}</td>
               <td>{user.password}</td>
               <td>
-                <select value={user.role} onChange={(e) => handleRoleChange(Number(user.userid), e.target.value)}>
+                <select value={user.role} onChange={(e) => handleRoleChange(user.userid, e.target.value as userRole)}>
                   <option value="admin">Admin</option>
                   <option value="user">User</option>
                 </select>
@@ -54,7 +65,7 @@ const UserList = () => {
                 <Link component={RouterLink} to={`/DetailOfUser/${user.userid}`}>Detail</Link>
               </td>
               <td>
-                <button onClick={() => handleSoftDelete(Number(user.userid))}>Delete</button>
+                <button onClick={() => handleSoftDelete(user.userid)}>Delete</button>
               </td>
             </tr>
 
