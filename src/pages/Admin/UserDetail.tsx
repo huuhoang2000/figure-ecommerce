@@ -3,30 +3,34 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Link as RouterLink } from 'react-router-dom';
 import { Link } from "@mui/material";
 import { useEffect } from "react";
-import { getUserDetails } from "../store/selector/user.selector";
-import { setUserDetails } from "../store/slices/user.slice";
+import { getUserDetails } from "../../store/selector/user.selector";
+import { setUserDetails } from "../../store/slices/user.slice";
 
 const UserDetail = () => {
   const navigate = useNavigate();
 
   const { id } = useParams();
-
+  console.log(id);
+  
   const dispatch = useDispatch();
   
   const user = useSelector(getUserDetails);
 
-  useEffect(() => {
-    dispatch(setUserDetails(Number(id)))
-  }, [id, dispatch]);
+
+  if (id != undefined) {
+    useEffect(() => {
+    dispatch(setUserDetails(id))
+    }, [id, dispatch]);
+  }
 
   const navigateToUpdateScreen = () => {
-    navigate(`/update-user/${user?.userid}`);
+    navigate(`/admin/update-user/${user?.userid}`);
   }
 
   if (!user) {
     return <>
       <h1>404 | user not found with the ID {id} </h1>
-      <Link component={RouterLink} to={'/user'}>Back the the User list</Link>
+      <Link component={RouterLink} to={'/admin/userList'}>Back the the User list</Link>
     </>
   }
 

@@ -1,9 +1,11 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import User  from "../models/User"
-import AdminForm  from "../components/AdminForm"
-import { UserFormDetail }  from "../components/AdminForm"
-import { createUser } from "../store/slices/user.slice";
+import User  from "../../models/User"
+import AdminForm  from "../../components/AdminForm"
+import { UserFormDetail }  from "../../components/AdminForm"
+import { createUser } from "../../store/slices/user.slice";
+import { Link } from "@mui/material";
+import { Link as RouterLink } from 'react-router-dom';
 
 const AddUser = () => {
   const navigate = useNavigate();
@@ -17,12 +19,14 @@ const AddUser = () => {
       isDeleted: false, 
     };
     dispatch(createUser(user));
-    navigate('/user');
+    navigate('/admin/userList');
   }
 
   return (
     <>
       <AdminForm title="Add User" submitBtnText="Add" onSubmit={handleSubmit} />
+      <Link component={RouterLink} to="/admin/userList">Go back to the List</Link>
+
     </>
   );
 }

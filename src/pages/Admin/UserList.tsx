@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux"
-import { getAllUsers } from "../store/selector/user.selector";
-import { updateInfo, softDeleteUser } from "../store/slices/user.slice";
+import { getAllUsers } from "../../store/selector/user.selector";
+import { updateInfo, softDeleteUser } from "../../store/slices/user.slice";
 import { Link } from "@mui/material";
 import { Link as RouterLink } from 'react-router-dom';
-import User from "../models/User";
+import User from "../../models/User";
 
 const UserList = () => {
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ type userRole = 'admin' | 'user';
     <>
       <h1>User List</h1>
 {/* use Material-UI’s Link component with routing */}
-      <Link component={RouterLink} to="/add-user">Add a new product</Link>
+      <Link component={RouterLink} to="/admin/add-user">Add a new product</Link>
 
       <table className="text-center" style={{ width: '100%' }}>
         <thead>
@@ -62,7 +62,7 @@ type userRole = 'admin' | 'user';
                 </select>
               </td>
               <td>
-                <Link component={RouterLink} to={`/DetailOfUser/${user.userid}`}>Detail</Link>
+                <Link component={RouterLink} to={`/admin/user-detail/${user.userid}`}>Detail</Link>
               </td>
               <td>
                 <button onClick={() => handleSoftDelete(user.userid)}>Delete</button>

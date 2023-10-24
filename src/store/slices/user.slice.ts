@@ -2,13 +2,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import User from "../../models/User";
 
 interface State {
-  AllUsers: User[];
-  UserDetail: User | null;
+  allUsers: User[];
+  userDetail: User | null;
 }
 
 const initialState: State = {
-  AllUsers: [],
-  UserDetail: null,
+  allUsers: [],
+  userDetail: null,
 }
 
 type userRole = 'user' | 'admin';
@@ -24,7 +24,7 @@ interface UpdateInfoAction {
 }
 
 //error not explicitly define the type of the initial state.
-const adminSlice = createSlice({
+const userSlice = createSlice({
   name: "user",
   initialState,
 
@@ -32,27 +32,27 @@ const adminSlice = createSlice({
     createUser: (state, action:PayloadAction<User>) => {
       const userDetail = action.payload;
       const user = new User(userDetail.userid, userDetail.username, userDetail.email, userDetail.password);
-      state.AllUsers.push(user);
+      state.allUsers.push(user);
     },
     updateRole: (state, action:PayloadAction<UpdateRoleAction>) => {
       const {id, targetInfo} = action.payload;
-      const index = state.AllUsers.findIndex(user => user.userid === id);
-      state.AllUsers[index].role = targetInfo;
+      const index = state.allUsers.findIndex(user => user.userid === id);
+      state.allUsers[index].role = targetInfo;
     },
     softDeleteUser:  (state, action:PayloadAction<string>) => {
       const id = action.payload;
-      const index = state.AllUsers.findIndex(user => user.userid === id)
-      state.AllUsers[index].isDeleted = true;
+      const index = state.allUsers.findIndex(user => user.userid === id)
+      state.allUsers[index].isDeleted = true;
     },
     updateInfo: (state, action:PayloadAction<UpdateInfoAction>) => {
       const {id, AdminFormDetail } = action.payload;
 
-      const index = state.AllUsers.findIndex(
+      const index = state.allUsers.findIndex(
         (user) => user.userid === id && !user.isDeleted
       );
 
-      state.AllUsers[index] = {
-        ...state.AllUsers[index],
+      state.allUsers[index] = {
+        ...state.allUsers[index],
         userid: AdminFormDetail.userid,
         username: AdminFormDetail.username,
         password: AdminFormDetail.password,
@@ -62,17 +62,17 @@ const adminSlice = createSlice({
     }, 
     setUserDetails: (state, action:PayloadAction<string>) => {
       const id = action.payload;
-      const userDetail = state.AllUsers.find((user) => {
+      const userDetail = state.allUsers.find((user) => {
         return user.userid === id && !user.isDeleted;
       });
-      state.UserDetail = userDetail || null;
+      state.userDetail = userDetail || null;
     }    
     
   }
 })
 
 export const { createUser, updateRole, softDeleteUser, updateInfo, 
-  setUserDetails} = adminSlice.actions;
+  setUserDetails} = userSlice.actions;
 
-export const reducerAdmin = adminSlice.reducer;
+export const userReducer = userSlice.reducer;
 
