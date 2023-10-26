@@ -2,15 +2,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { Link as RouterLink } from 'react-router-dom';
 import { Link } from "@mui/material";
+import { Button } from "reactstrap";
 import { useEffect } from "react";
-import { getUserDetails } from "../../store/selector/user.selector";
-import { setUserDetails } from "../../store/slices/user.slice";
+import { getUserDetails } from "../../redux/selector/user.selector";
+import { setUserDetails } from "../../redux/slices/user.slice";
 
 const UserDetail = () => {
   const navigate = useNavigate();
 
   const { id } = useParams();
-  console.log(id);
   
   const dispatch = useDispatch();
   
@@ -23,6 +23,8 @@ const UserDetail = () => {
     }, [id, dispatch]);
   }
 
+
+
   const navigateToUpdateScreen = () => {
     navigate(`/admin/update-user/${user?.userid}`);
   }
@@ -34,6 +36,10 @@ const UserDetail = () => {
     </>
   }
 
+  const handleReturnUserlist = () => {
+    navigate(`/admin/userList`);
+  }
+
   return (
     <>
       <h1>Account: {user?.username}</h1>
@@ -43,6 +49,8 @@ const UserDetail = () => {
       <p><b>Password: </b>{user?.password}</p>
       <p><b>Email: </b>{user?.email}</p>
       <p><b>Role: </b>{user?.role}</p>
+      <Button color="primary" onClick={handleReturnUserlist}> Return to user list </Button>
+      
     </>
   )
 }

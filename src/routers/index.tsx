@@ -7,6 +7,7 @@ import UserList from "../pages/Admin/UserList";
 import Store from "../pages/Store";
 import Admin from "../pages/Admin";
 import UserDetail from "../pages/Admin/UserDetail";
+import Bin from "../pages/Admin/Bin";
 
 // store : "/" => buy
 
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
         path: "*",
         element: <PageNotFound />,
       },
+      {
+        path: "/admin/trash",
+        element: <Bin />
+      }
     ],
   },
 ]);

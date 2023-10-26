@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom"
-import { getUserDetails } from "../../store/selector/user.selector";
+import { getUserDetails } from "../../redux/selector/user.selector";
 import { Link } from "@mui/material";
 import { Link as RouterLink } from 'react-router-dom';
 import AdminForm from "../../components/AdminForm";
 import { UserFormDetail }  from "../../components/AdminForm";
 import User from "../../models/User";
-import { setUserDetails, updateInfo } from "../../store/slices/user.slice";
+import { setUserDetails, updateInfo } from "../../redux/slices/user.slice";
 import { useEffect } from "react";
 
 const UpdateUserProfile = () => {
@@ -24,12 +24,12 @@ const UpdateUserProfile = () => {
     }
   }, [dispatch, id])
 
-  const handleSubmit = (AdminFormDetail: UserFormDetail) => {
+  const handleSubmit = (adminFormDetail: UserFormDetail) => {
     if (id) {
-      const user = new User(AdminFormDetail.userid, AdminFormDetail.username, AdminFormDetail.email, AdminFormDetail.password);
+      const user = new User(adminFormDetail.userid, adminFormDetail.username, adminFormDetail.email, adminFormDetail.password, adminFormDetail.name, adminFormDetail.phone, adminFormDetail.address);
 
-      dispatch(updateInfo({id: id, AdminFormDetail:user}));
-      navigate(`/admin/user-detail/${id}`)
+      dispatch(updateInfo({id: id, adminFormDetail:user}));
+      navigate(`/admin/user-detail/${adminFormDetail.userid}`)
     }
   }
 
@@ -45,7 +45,7 @@ const UpdateUserProfile = () => {
       <div><Link component={RouterLink} to={`/admin/user-detail/${id}`}>back to product detail</Link></div>
       <div><Link component={RouterLink} to={'/admin/userList'}>Back to product list</Link></div>
       <AdminForm title="Update task" submitBtnText="Save" productinfo={user} onSubmit={handleSubmit}></AdminForm>
-    </>
+   </>
   )
 }
 

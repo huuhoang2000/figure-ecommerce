@@ -8,8 +8,6 @@ const Admin: React.FunctionComponent<IAdminProps> = () => {
   return (
     <>
       {/* Navbar */}
-      <div>Admin</div>
-
       <Outlet />
     </>
   );
