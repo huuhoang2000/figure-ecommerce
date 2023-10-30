@@ -8,9 +8,8 @@ interface rootstate {
   };
 }
 
-export const getAllUsers = (state: rootstate) => state.users.allUsers.filter(t => !t.isDeleted);
-export const getUserDetails = (state: rootstate) => state.users.userDetail;
-
 const userState = (state: rootstate) => state.users;
 
-export const getAllUsersFromBinSelector = createSelector(userState, (users) => users.userDetail) 
+export const getAllUsers = createSelector(userState, (users) => users.allUsers.filter(t => !t.isDeleted));
+export const getUserDetails = createSelector(userState, (users) => users.userDetail);
+export const getAllUsersFromBinSelector = createSelector(userState, (users) => users.allUsers.filter(users => users.isDeleted)) 

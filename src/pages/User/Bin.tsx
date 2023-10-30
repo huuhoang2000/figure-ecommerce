@@ -2,10 +2,10 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks"
 import { getAllUsersFromBinSelector } from "../../redux/selector/user.selector";
 import { hardDeleteUser, softDeleteUser } from "../../redux/slices/user.slice";
-import { Button } from "reactstrap";
+import { Button, Table } from "reactstrap";
+import { Select } from "@mui/material";
 
 interface userBinProps {
-  
 }
 
 const Bin: React.FunctionComponent<userBinProps> = () => {
@@ -32,11 +32,10 @@ const Bin: React.FunctionComponent<userBinProps> = () => {
 
   return (
     <>
-      <h1>List of user accounts get deleted bin</h1>
-      <br />
+      <h1 className="text-center">List of user accounts get deleted bin</h1>
       <Button color="primary" onClick={handleReturnUserList}>Return to User List</Button>
       <br />
-      <table border={1} style={{ borderCollapse: 'collapse', width: '100%' }}>
+      <Table border={1} style={{ borderCollapse: 'collapse', width: '100%' }}>
         <thead>
           <tr>
             <th>UserName</th>
@@ -46,26 +45,36 @@ const Bin: React.FunctionComponent<userBinProps> = () => {
             <th>Phone</th>
             <th>Address</th>
             <th>Role</th>
-            <th>Detail</th>
-            <th>Delete</th>
+            <th>Restore</th>
+            <th>True Delete</th>
           </tr>
         </thead>
         <tbody>
-            <td>{users?.username}</td>
-            <td>{users?.password}</td>
-            <td>{users?.email}</td>
-            <td>{users?.name}</td>
-            <td>{users?.phone}</td>
-            <td>{users?.address}</td>
-            <td>{users?.role}</td>
-            <td>
-              {users?.userid && <button onClick={() => handleRestore(users.userid)}>Restores</button>}
-            </td>
-            <td>
-              {users?.userid && <button onClick={() => handleDelete(users.userid)}>Delete</button>}
-            </td>
+          {users.map(user => (
+            <tr key={user.userid}>
+              <td>{user.username}</td>
+              <td>{user.password}</td>
+              <td>{user.email}</td>
+              <td>{user.name}</td>
+              <td>{user.phone}</td>
+              <td>{user.address}</td>
+              <td>
+                <Select value={user.role} disabled>
+                  <option value="admin">Admin</option>
+                  <option value="user">User</option>
+                </Select>
+              </td>
+              <td>
+                <Button onClick={() => handleRestore(user.userid)}>Restore</Button>
+              </td>
+              <td>
+                <Button onClick={() => handleDelete(user.userid)}>Delete</Button>
+              </td>
+            </tr>
+          ))}
+         
         </tbody>
-      </table>
+      </Table>
     </>
   )
 }

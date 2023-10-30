@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import User from "../models/User";
 import { useParams } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -66,6 +66,18 @@ const AdminForm = ( {submitBtnText, onSubmit: submit}: AdminFormProps ) => {
         <div>
           <Label htmlFor="password">Password</Label>
           <Input type="password" name="password" id="password" value={userDetail.password} onChange={handleUserChange} />
+        </div>
+        <div>
+          <Label htmlFor="name">Name</Label>
+          <Input type="text" name="name" id="name" value={userDetail.name} onChange={handleUserChange} />
+        </div>
+        <div>
+          <Label htmlFor="phone">Phone</Label>
+          <Input type="text" name="phone" id="phone" value={userDetail.phone} onChange={handleUserChange} />
+        </div>
+        <div>
+          <Label htmlFor="address">Address</Label>
+          <Input type="text" name="address" id="address" value={userDetail.address} onChange={handleUserChange} />
         </div>
       </FormGroup>
       <Button color="primary">{submitBtnText}</Button>

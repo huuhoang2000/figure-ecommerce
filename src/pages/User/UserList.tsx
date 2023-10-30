@@ -1,18 +1,18 @@
 import { useDispatch, useSelector } from "react-redux"
 import { updateInfo, softDeleteUser } from "../../redux/slices/user.slice";
 // import { Link } from "@mui/material";
-import { Link, Link as RouterLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {Table, Button} from 'reactstrap' ;
 import User from "../../models/User";
 import { getAllUsers } from "../../redux/selector/user.selector";
+import { useAppSelector } from "../../redux/hooks";
 
 const UserList = () => {
   const dispatch = useDispatch();
-  const users: User[] = useSelector(getAllUsers);
+  const users: User[] = useAppSelector(getAllUsers);
   
   const handleSoftDelete = (id: string) => {
     const isConfirmed = window.confirm('Are you sure you want to delete?');
-
     if (isConfirmed) {
       dispatch(softDeleteUser({id, value: true})); 
     }
@@ -42,17 +42,16 @@ type userRole = 'admin' | 'user';
     navigate("/admin/trash")
   }
 
+  const handleShowingDetail = (id: string) => {
+    navigate(`/admin/user-detail/${id}`)
+  }
+
   return (
     <>
-
       <h1 className="text-center">User List</h1>
-    
-{/* us      e Material-UI’s Link component with routing */}
-        {/* display flex and use them for layout for */}
-        <Button color="primary" onClick={navigateToAddUser}>Add a new product</Button>
+      <Button color="primary" onClick={navigateToAddUser}>Add a new product</Button>
         {/* bắt eventclick -> useRouter -> u */}
-        <Button color="primary" onClick={navigateToTrash}>Deleted User List</Button>
-
+      <Button color="primary" onClick={navigateToTrash}>Deleted User List</Button>
       <Table className="text-center" style={{ width: '100%' }}>
         <thead>
           <tr>
@@ -83,11 +82,7 @@ type userRole = 'admin' | 'user';
                 </select>
               </td>
               <td>
-                <Link  to={`/admin/user-detail/${user.userid}`}>    
-                  <Button color="primary" component={RouterLink}>
-                    Detail
-                  </Button>
-                </Link>
+                <Button color="primary" onClick={() => handleShowingDetail(user.userid)}>Detail</Button>
               </td>
               <td>
                 <Button color="primary" onClick={() => handleSoftDelete(user.userid)}>Delete</Button>

@@ -43,7 +43,7 @@ const UserDetail = () => {
   return (
     <>
       <h1>Account: {user?.username}</h1>
-      <button onClick={navigateToUpdateScreen}>Update</button>
+      <Button color="primary" onClick={navigateToUpdateScreen}>Update</Button>
       <p><b>ID: </b>{user?.userid}</p>
       <p><b>Username: </b>{user?.username}</p>
       <p><b>Password: </b>{user?.password}</p>
