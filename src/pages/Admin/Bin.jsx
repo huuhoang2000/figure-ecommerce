@@ -5,21 +5,18 @@ import { hardDeleteUser, softDeleteUser } from "../../redux/slices/user.slice";
 import { Button, Table } from "reactstrap";
 import { Select } from "@mui/material";
 
-interface userBinProps {
-}
-
-const Bin: React.FunctionComponent<userBinProps> = () => {
+const Bin = () => {
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
 
   const users = useAppSelector(getAllUsersFromBinSelector);
 
-  const handleRestore = (id: string) => {
+  const handleRestore = (id) => {
     dispatch(softDeleteUser({id , value: false}));
   }
 
-  const handleDelete = (id: string) => {
+  const handleDelete = (id) => {
     const isConfirmed = window.confirm("Are you sure you want to delete this user? This is not reversible!!!")
     if (isConfirmed) {
       dispatch(hardDeleteUser(id));

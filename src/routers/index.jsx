@@ -1,13 +1,13 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
 // import UserList from "../pages/UserList";
-import AddUser from "../pages/Admin/AddUser";
-import PageNotFound from "../pages/Admin/PageNotFound";
-import UpdateUserProfile from "../pages/Admin/UpdateUserProfile";
-import UserList from "../pages/Admin/UserList";
+import AddUser from "../pages/User/AddUser";
+import PageNotFound from "../pages/User/PageNotFound";
+import UpdateUserProfile from "../pages/User/UpdateUserProfile";
+import UserList from "../pages/User/UserList";
 import Store from "../pages/Store";
-import Admin from "../pages/Admin";
-import UserDetail from "../pages/Admin/UserDetail";
-import Bin from "../pages/Admin/Bin";
+import Admin from "../pages/User";
+import UserDetail from "../pages/User/UserDetail";
+import Bin from "../pages/User/Bin";
 
 // store : "/" => buy
 

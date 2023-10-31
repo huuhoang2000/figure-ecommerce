@@ -1,26 +1,23 @@
 import { useDispatch, useSelector } from "react-redux"
 import { updateInfo, softDeleteUser } from "../../redux/slices/user.slice";
-// import { Link } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
 import {Table, Button} from 'reactstrap' ;
-import User from "../../models/User";
+import User from "../../models/User.js";
 import { getAllUsers } from "../../redux/selector/user.selector";
 import { useAppSelector } from "../../redux/hooks";
 
 const UserList = () => {
   const dispatch = useDispatch();
-  const users: User[] = useAppSelector(getAllUsers);
+  const users = useAppSelector(getAllUsers);
   
-  const handleSoftDelete = (id: string) => {
+  const handleSoftDelete = (id) => {
     const isConfirmed = window.confirm('Are you sure you want to delete?');
     if (isConfirmed) {
       dispatch(softDeleteUser({id, value: true})); 
     }
   }
 
-type userRole = 'admin' | 'user';
-
-  const handleRoleChange = (id: string, newRole: userRole) => {
+  const handleRoleChange = (id, newRole) => {
     const user = users.find(user => user.userid === id);
 
     if (user) {
@@ -42,7 +39,7 @@ type userRole = 'admin' | 'user';
     navigate("/admin/trash")
   }
 
-  const handleShowingDetail = (id: string) => {
+  const handleShowingDetail = (id) => {
     navigate(`/admin/user-detail/${id}`)
   }
 
@@ -76,7 +73,7 @@ type userRole = 'admin' | 'user';
               <td>{user.phone}</td>
               <td>{user.address}</td>
               <td>
-                <select value={user.role} onChange={(e) => handleRoleChange(user.userid, e.target.value as userRole)}>
+                <select value={user.role} onChange={(e) => handleRoleChange(user.userid, e.target.value)}>
                   <option value="admin">Admin</option>
                   <option value="user">User</option>
                 </select>

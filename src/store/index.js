@@ -10,9 +10,4 @@ const store = configureStore({
   middleware: [thunk]
 });
 
-export type RootState = ReturnType<typeof store.getState>;
-//enhance the AppDispatch to be aware of thunk
-export type AppDispatch = typeof store.dispatch;
-
-
 export default store;

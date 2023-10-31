@@ -1,28 +1,9 @@
-import { ChangeEvent, useEffect, useState } from "react";
-import User from "../models/User";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 
-
-export interface UserFormDetail {
-  userid: string;
-  username: string;
-  email: string;
-  password: string;
-  name: string;
-  phone: string;
-  address: string;
-}
-
-interface AdminFormProps {
-  title: string;
-  productinfo?: User;
-  submitBtnText: string;
-  onSubmit: (userDetail: UserFormDetail) => void;
-}
-
-const AdminForm = ( {submitBtnText, onSubmit: submit}: AdminFormProps ) => {
+const AdminForm = ( {submitBtnText, onSubmit} ) => {
   const {id} = useParams();
 
   const [userDetail, setAdminFormUserDetail] = useState({
@@ -35,17 +16,15 @@ const AdminForm = ( {submitBtnText, onSubmit: submit}: AdminFormProps ) => {
     address: '',
   });
 
-  const handleUserChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleUserChange = (e) => {
     const {name, value} = e.target;
-
     setAdminFormUserDetail(prev  => ({...prev, [name]: value}));
   };
 
-  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    submit(userDetail);
+    onSubmit(userDetail);
   }
-
 
   return (
     <Form onSubmit={handleLogin} className="text-center" style={{ width: '100%' }}>
@@ -81,8 +60,7 @@ const AdminForm = ( {submitBtnText, onSubmit: submit}: AdminFormProps ) => {
         </div>
       </FormGroup>
       <Button color="primary">{submitBtnText}</Button>
-    </Form>
-    
+    </Form> 
   )
 }
 
