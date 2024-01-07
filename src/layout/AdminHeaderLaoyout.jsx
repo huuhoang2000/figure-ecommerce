@@ -1,7 +1,9 @@
 import { Container, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem, Navbar, NavbarBrand} from "reactstrap"
 import { NavLink } from "react-router-dom";
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Link } from "react-scroll";
+import PropTypes from 'prop-types';
+
 
 const HeaderLayout = ( {children} ) => {
     //drop down button
@@ -41,5 +43,9 @@ const HeaderLayout = ( {children} ) => {
     </div>
   )
 }
+
+HeaderLayout.propTypes = {
+  children: PropTypes.node,
+};
 
 export default HeaderLayout;

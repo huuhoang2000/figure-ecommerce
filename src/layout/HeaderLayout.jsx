@@ -1,7 +1,8 @@
 import { Container, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem, Navbar, NavbarBrand} from "reactstrap"
 import { NavLink } from "react-router-dom";
 import { login, logout } from '../store/slices/login.slice'
-import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
 import { Link } from "react-scroll";
 import { useAppSelector } from "../store/hooks";
 import { useDispatch } from "react-redux";
@@ -13,11 +14,7 @@ const HeaderLayout = ( {children} ) => {
     // login state
     // get username from token once login is complete.
     const username = localStorage.getItem('username');
-    const role = localStorage.getItem('role');
-
-    // Filter the carts based on the user role
-    const userCarts = role === 'admin' ? carts : carts.filter(cart => cart.userId === username);
-
+    
     const isLoggedIn = useAppSelector((state) => state.login.isLoggedIn);
     const dispatch = useDispatch();
 
@@ -34,7 +31,7 @@ const HeaderLayout = ( {children} ) => {
       if (token) {
         dispatch(login());
       }
-    }, []);
+    }, [dispatch]);
 
     return (
     <div>
@@ -84,5 +81,9 @@ const HeaderLayout = ( {children} ) => {
     </div>
   )
 }
+
+HeaderLayout.propTypes = {
+  children: PropTypes.node,
+};
 
 export default HeaderLayout;

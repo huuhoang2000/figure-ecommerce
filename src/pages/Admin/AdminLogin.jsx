@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { redirect } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
+import { checkTokenLogin } from '../../components/TokenCheckLogin';
 import { Input, Form, Button, Label, FormGroup } from 'reactstrap';
 import HeaderLayout from '../../layout/HeaderLayout';
 import FooterLayout from '../../layout/FooterLayout';
@@ -9,16 +10,15 @@ import '../../assets/CSS/mainpage.css';
 import { fetchLoginValidation } from '../../store/slices/login.slice';
 import { fetchUser } from '../../store/slices/user.slice';
 
-export const checkTokenLogin = () => {
-  const token = localStorage.getItem('token');
-  return token ? redirect('/mainpage') : null;
-}
-
 function AdminLogin() {
   const dispatch = useDispatch();
-  // const loginValidation = useAppSelector(getLoginToken);
+  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    checkTokenLogin();
+  }, []);
 
   useEffect(() => {
     dispatch(fetchUser()); // fetch the users when the component mounts

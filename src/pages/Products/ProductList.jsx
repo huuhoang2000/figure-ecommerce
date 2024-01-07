@@ -16,11 +16,8 @@ const ProductList = () => {
   const dispatch = useDispatch();
   const products = useAppSelector(getAllProducts);
   const [searchTerm, setSearchTerm] = useState('');
-  // const handleSearch = (term) => {
-  //   setSearchTerm(term);
-  // }
 
-  // const [filteredProducts, setFilteredData] = useState(products);
+  const [filteredProducts, setFilteredData] = useState(products);
   const [selectedCategories, setSelectedCategories] = useState({});
   const [loading, setLoading] = useState(true); // Add this line
 
@@ -31,7 +28,7 @@ const ProductList = () => {
     });
   };
 
-  const filterProducts = products.filter(product => {
+  const filterProducts = filteredProducts.filter(product => {
     const matchesSearchTerm = product.title.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCheckbox = product.category && selectedCategories[product.category];
     return matchesSearchTerm && matchesCheckbox;

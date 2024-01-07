@@ -1,5 +1,4 @@
-import React from 'react'
-import { Link, Element } from 'react-scroll';
+import { Element } from 'react-scroll';
 import { Col, Container, Row } from 'reactstrap';
 
  const FooterLayout = () => {
