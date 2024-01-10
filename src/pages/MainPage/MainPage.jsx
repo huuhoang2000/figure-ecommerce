@@ -1,4 +1,4 @@
-import { Button, Card, CardBody, CardImg, CardText, CardTitle, Col, Container, Nav, Row } from "reactstrap"
+import { Button, Card, CardBody, CardImg, CardText, CardTitle, Col, Container, Row } from "reactstrap"
 import { getAllProducts } from "../../store/selector/product.selector";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../store/hooks";
@@ -26,7 +26,7 @@ const MainPage = () => {
 
   useEffect(() => {
     dispatch(fetchProducts());
-  }, []);
+  }, [dispatch]);
   return (
     <>
       <div>

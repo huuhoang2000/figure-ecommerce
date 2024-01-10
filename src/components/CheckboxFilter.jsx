@@ -1,5 +1,5 @@
-// CheckboxFilter.js
-import React from 'react';
+// import React from 'react';
+import PropTypes from 'prop-types';
 
 const CheckboxFilter = ({ categories, handleCategoryChange, selectedCategories  }) => {
   return (
@@ -18,6 +18,12 @@ const CheckboxFilter = ({ categories, handleCategoryChange, selectedCategories  
       ))}
     </div>
   );
+};
+
+CheckboxFilter.propTypes = {
+  categories: PropTypes.array.isRequired,
+  handleCategoryChange: PropTypes.func.isRequired,
+  selectedCategories: PropTypes.object.isRequired,
 };
 
 export default CheckboxFilter;

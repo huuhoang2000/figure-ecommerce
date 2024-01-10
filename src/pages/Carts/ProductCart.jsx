@@ -1,4 +1,4 @@
-import React from 'react'
+/* eslint-disable react/prop-types */
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../store/hooks';
 import { Button } from 'reactstrap';

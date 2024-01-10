@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { checkTokenLogin } from '../../components/TokenCheckLogin';
+import checkTokenLogin from '../../components/TokenCheckLogin';
 import { Input, Form, Button, Label, FormGroup } from 'reactstrap';
 import HeaderLayout from '../../layout/HeaderLayout';
 import FooterLayout from '../../layout/FooterLayout';

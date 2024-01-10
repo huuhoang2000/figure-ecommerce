@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Button } from 'reactstrap';
@@ -27,7 +27,6 @@ const UserDetail = () => {
           <p><b>Username: </b>{user.username}</p>
           <p><b>Password: </b>{user.password}</p>
           <p><b>Email: </b>{user.email}</p>
-          {/* <p><b>Name: </b>{user.name ? `${user.name.firstname} ${user.name.lastname}` : ''}</p>               */}
           <p><b>Name: </b> {user.name ? `${user.name.firstname} ${user.name.lastname}` : ''}
           {user.name ? (
           <>
@@ -36,10 +35,7 @@ const UserDetail = () => {
           </>
           ) : ''}
           </p>
-          {/* {user.name ? `${user.name.firstname} ${user.name.lastname}` : ''}</p>               */}
-          {/* <p><b>Role: </b>{user.role}</p> */}
           <p><b>Phone: </b>{user.phone}</p>
-          {/* <p><b>Address</b>{user.address ?  `City: ${user.address.city}, Street: ${user.address.street}, Number: ${user.address.number}, Zipcode: ${user.address.zipcode}` : ''}</p> */}
           <p>
             <b>Address:</b>
             {user.address ? (

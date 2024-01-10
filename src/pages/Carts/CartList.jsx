@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Button, Card, CardBody, CardImg, CardText, CardTitle, Col, Container, Row, Table } from "reactstrap"
+import { Button,Container, Table } from "reactstrap"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom";
 import { deleteCart, fetchAllCarts } from "../../store/slices/cart.slice";
@@ -14,7 +14,7 @@ const CartList = () => {
   const carts = useAppSelector(getAllCarts);
   useEffect(() => {
     dispatch(fetchAllCarts());
-  }, []);
+  }, [dispatch]);
 
   const handleDelete = (id) => {
     if (window.confirm('Are you sure you want to delete this account?')) {

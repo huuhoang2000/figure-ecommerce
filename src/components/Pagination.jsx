@@ -1,7 +1,7 @@
-import React from 'react'
 import { Nav } from 'reactstrap';
+import PropTypes from 'prop-types';
 
-const Pagination = ({ currentPage, productsPerPage, totalProducts, paginate }) => {
+const Pagination = ({ productsPerPage, totalProducts, paginate }) => {
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(totalProducts / productsPerPage); i++) {
@@ -25,5 +25,11 @@ const Pagination = ({ currentPage, productsPerPage, totalProducts, paginate }) =
     </Nav>
   )
 }
+
+Pagination.propTypes = {
+  productsPerPage: PropTypes.number.isRequired,
+  totalProducts: PropTypes.number.isRequired,
+  paginate: PropTypes.func.isRequired,
+};
 
 export default Pagination;

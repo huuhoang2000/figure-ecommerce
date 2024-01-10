@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+/* eslint-disable no-undef */
+/* eslint-disable react/prop-types */
+import { useState } from 'react';
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/CSS/mainpage.css';

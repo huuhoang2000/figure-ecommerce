@@ -3,7 +3,9 @@ import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const productForm = ( {submitBtnText, onSubmit} ) => {
-  const [productDetail, setProductDetail] = useState({
+  const [productDetail, setProductDetail] = 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useState({
     title: '',
     price: '',
     category: '',
@@ -50,8 +52,8 @@ const productForm = ( {submitBtnText, onSubmit} ) => {
             <option value="">Select a category</option>
             <option value="electronics">Electronics</option>
             <option value="jewelery">Jewelery</option>
-            <option value="men's clothing">Men's Clothing</option>
-            <option value="women's clothing">Women's Clothing</option>
+            <option value="men's clothing">{'Men\'s Clothing'}</option>
+            <option value="women's clothing">{'Women\'s Clothing'}</option>
           </Input>            
           </FormGroup>
           <Button color="primary">{submitBtnText}</Button>

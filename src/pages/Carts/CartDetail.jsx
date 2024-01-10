@@ -1,6 +1,6 @@
 import HeaderLayout from "../../layout/HeaderLayout";
 import FooterLayout from "../../layout/FooterLayout";
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getCartByCartId, getLoading } from "../../store/selector/cart.selector";
@@ -37,11 +37,11 @@ export const CartDetail = () => {
     return <div>Loading...</div>
   }
 
-  const handleDelete = (id) => {
-    if (window.confirm('Are you sure you want to delete this cart?')) {
-      dispatch(deleteCart(id));
-    }
-  }
+  // const handleDelete = (id) => {
+  //   if (window.confirm('Are you sure you want to delete this cart?')) {
+  //     dispatch(deleteCart(id));
+  //   }
+  // }
 
   // console.log(productDetails);
 

@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+/* eslint-disable react/prop-types */
+import { useState } from 'react'
 
 const ShortenDescription = ( {  description} ) => {
   const [showFullDescription, setShowFullDescription] = useState(false);

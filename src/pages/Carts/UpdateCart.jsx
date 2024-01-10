@@ -1,9 +1,9 @@
-import React from 'react'
 import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppSelector } from '../../store/hooks';
 import { getCartByCartId, getLoading } from '../../store/selector/cart.selector';
 import { fetchACartById } from '../../store/slices/cart.slice';
+import { useEffect } from 'react';
 
 const UpdateCart = () => {
   const { id } = useParams();

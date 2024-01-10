@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Form, FormGroup, Label, Input, Button, Card } from "reactstrap";
+import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const CartForm = () => {
+// eslint-disable-next-line react/prop-types
+const CartForm = ( {onSubmit, submitBtnText}) => {
   const [cartDetail, setCartDetail] = useState({
     id: '',
     userId: '',
@@ -26,7 +27,7 @@ const CartForm = () => {
     
   }
 
-  const handleFormSubmit = () => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
     onSubmit(cartDetail);
   }

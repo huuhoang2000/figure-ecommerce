@@ -1,6 +1,4 @@
-// SearchComponent.js
-import React from 'react';
-
+/* eslint-disable react/prop-types */
 const SearchProduct = ({ searchTerm, setSearchTerm, data, setFilteredData }) => {
   const handleChange = event => {
     setSearchTerm(event.target.value);

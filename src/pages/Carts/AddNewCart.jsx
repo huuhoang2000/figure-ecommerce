@@ -1,14 +1,15 @@
-import React from 'react'
 import { useAppSelector } from '../../store/hooks'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Button } from 'reactstrap';
 import { fetchAllCarts } from '../../store/slices/cart.slice';
+import CartForm from '../../components/CartForm';
+import {addCart} from '../../store/slices/cart.slice';
 
 export const AddNewCart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const carts = useAppSelector(getAllCarts);
+  const carts = useAppSelector(fetchAllCarts);
 
   const handleAddCart = (cartDetail) => {
     let newId = cartDetail.id;

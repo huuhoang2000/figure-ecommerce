@@ -17,7 +17,8 @@ import Admin from "../pages/Admin";
 import Carts from "../pages/Carts"
 import AddNewCart from "../pages/Carts/AddNewCart";
 import CartList from "../pages/Carts/CartList";
-import AdminLogin, { checkTokenLogin } from "../pages/Admin/AdminLogin";
+import AdminLogin from "../pages/Admin/AdminLogin";
+import checkTokenLogin from "../components/TokenCheckLogin"
 import { CartDetail } from "../pages/Carts/CartDetail";
 import UpdateCart from "../pages/Carts/UpdateCart";
 // store : "/" => buy
