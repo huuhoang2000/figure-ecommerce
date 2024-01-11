@@ -1,4 +1,5 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
+import { useAppSelector } from "../../store/hooks";
 import { useParams, useNavigate } from "react-router-dom"
 import { getLoading, getUserDetails } from "../../store/selector/user.selector";
 import UserForm from "../../components/UserForm";

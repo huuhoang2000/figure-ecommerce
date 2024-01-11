@@ -3,7 +3,7 @@ import FooterLayout from "../../layout/FooterLayout";
 import { useEffect, useState } from 'react'
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getCartByCartId, getLoading } from "../../store/selector/cart.selector";
+import { getCartByCartId} from "../../store/selector/cart.selector";
 import { fetchACartById } from "../../store/slices/cart.slice";
 import { Table } from "reactstrap";
 import { useAppSelector } from "../../store/hooks";
@@ -14,36 +14,27 @@ export const CartDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const cart = useAppSelector(getCartByCartId);
-  const loading = useAppSelector(getLoading);
   const [productDetails, setProductDetails] = useState([]);
+  useEffect(() => {
+      dispatch(fetchACartById(Number(id)));
+    }, [id, dispatch]);
 
   useEffect(() => {
     if (cart && cart.products) {
       const productPromises = cart.products.map(product => 
-        dispatch(fetchProductsById(product))
+        dispatch(fetchProductsById(product.productid))
       );
 
       Promise.all(productPromises)
-        .then(details => setProductDetails(details))
-        .catch(error => console.error(error));
+        .then(details => {
+          setProductDetails(details);
+        })
+        .catch(error =>  {
+          console.error(error);
+        });
+
     }
-  }, [cart, dispatch]);
-
-  useEffect(() => {
-    dispatch(fetchACartById(Number(id)));
-  }, [id, dispatch])
-
-  if (loading === 'loading' || !cart) {
-    return <div>Loading...</div>
-  }
-
-  // const handleDelete = (id) => {
-  //   if (window.confirm('Are you sure you want to delete this cart?')) {
-  //     dispatch(deleteCart(id));
-  //   }
-  // }
-
-  // console.log(productDetails);
+  }, [cart, dispatch]); 
 
   return (
     <>
@@ -62,11 +53,8 @@ export const CartDetail = () => {
           </thead>
           <tbody>
             {productDetails.map((product, index) => (
-              <ProductCart 
-                key={index} 
-                product={product} 
-                quantity={cart.products[index].quantity} 
-              />
+              // console.log(product),
+              <ProductCart key={index} product={product} quantity={cart.products[index].quantity} />
             ))}
           </tbody>
         </Table>

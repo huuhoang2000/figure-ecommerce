@@ -16,7 +16,7 @@ const UserList = () => {
   const navigate = useNavigate();
   useEffect(() => {
     dispatch(fetchUser());
-  }, []);
+  }, [dispatch]);
 
   const handleRoleChange = (id, newRole) => {
     const user = users.find(user => user.id === id);
@@ -28,13 +28,9 @@ const UserList = () => {
         user.email, 
         user.password, 
         `${user.name.firstname} ${user.name.lastname}`, 
-        // user.name,
         user.phone, 
         `${user.address.city}, ${user.address.street}, ${user.address.number}, ${user.address.zipcode}` 
-        // user.address
-        );
-        console.log(user.name);
-        console.log(user.address);
+      );
       updatedUser.role = newRole;
       dispatch(editUser({id, userFormDetail: updatedUser.toPlainObject()}))
     }

@@ -174,11 +174,11 @@ const cartsSlice = createSlice({
       .addCase(deleteCart.pending, (state) => {
         state.loading = 'loading';
       })
-      .addCase(deleteCart.fulfilled, (state) => {
+      .addCase(deleteCart.fulfilled, (state, action) => {
         state.loading = 'succeeded';
         state.allCarts = state.allCarts.filter(cart => cart.id !== action.payload.id);
       })
-      .addCase(deleteCart.rejected, (state) => {
+      .addCase(deleteCart.rejected, (state, action) => {
         state.loading = 'failed';
         state.allCarts = action.error.message;
       })

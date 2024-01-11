@@ -1,21 +1,23 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 import { Input, Form, Button, Label, FormGroup } from 'reactstrap';
-import { useAppSelector } from '../../store/hooks';
-import { getAllUsers } from '../../store/selector/user.selector';
 import HeaderLayout from '../../layout/HeaderLayout';
 import FooterLayout from '../../layout/FooterLayout';
 import '../../assets/CSS/mainpage.css';
+import { useDispatch } from 'react-redux';
+import { fetchLoginValidation } from '../../store/slices/login.slice';
 
 function UserLogin() {
   const dispatch = useDispatch();
-  const users = useAppSelector(getAllUsers);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const user = users.find(user => user.username === username && user.password === password);
+    try {
+      await dispatch(fetchLoginValidation({ username, password }));
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
   return (
@@ -40,8 +42,6 @@ function UserLogin() {
       </div>
       <div><FooterLayout></FooterLayout></div>
       </>
-    
   );
 }
-
 export default UserLogin;

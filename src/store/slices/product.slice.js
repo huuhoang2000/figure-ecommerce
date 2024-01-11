@@ -10,14 +10,14 @@ export const createProduct = createAsyncThunk('products/createProduct', async (p
   const response = await axios.post('https://fakestoreapi.com/products', post);
   return response.data;
 })
-//Get a single product by id
-export const fetchProductsById = createAsyncThunk('products/fetchProductById', async (productId) => {
-  const response = await axios.get(`https://fakestoreapi.com/products/${productId}`);
-  // console.log(response.data)
+export const fetchProductsById = createAsyncThunk('products/fetchProductById', async (id) => {
+  const response = await axios.get(`https://fakestoreapi.com/products/${id}`);
+  // console.log(response)
+  console.log(response.data)
   return response.data;
 })
 
-export const updateProductById = createAsyncThunk('products/updateProductById', async () => {
+export const updateProductById = createAsyncThunk('products/updateProductById', async (id) => {
   const response = await axios.post(`https://fakestoreapi.com/products/${id}`);
   return response.data;
 })
