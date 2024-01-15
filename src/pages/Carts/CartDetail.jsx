@@ -2,13 +2,15 @@ import HeaderLayout from "../../layout/HeaderLayout";
 import FooterLayout from "../../layout/FooterLayout";
 import { useEffect, useState } from 'react'
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getCartByCartId} from "../../store/selector/cart.selector";
 import { fetchACartById } from "../../store/slices/cart.slice";
 import { Table } from "reactstrap";
 import { useAppSelector } from "../../store/hooks";
-import { fetchProductsById } from "../../store/slices/product.slice";
-import ProductCart from "./ProductCart";
+import { deleteProduct, fetchProductsById } from "../../store/slices/product.slice";
+import ProductOfCart from "./ProductOfCart";
+import { Button } from 'reactstrap';
+
 
 export const CartDetail = () => {
   const { id } = useParams();
@@ -21,9 +23,9 @@ export const CartDetail = () => {
 
   useEffect(() => {
     if (cart && cart.products) {
-      const productPromises = cart.products.map(product => 
-        dispatch(fetchProductsById(product.productid))
-      );
+      const productPromises = cart.products.map(product => {
+        return dispatch(fetchProductsById(Number(product.productId))); 
+      });
 
       Promise.all(productPromises)
         .then(details => {
@@ -31,16 +33,24 @@ export const CartDetail = () => {
         })
         .catch(error =>  {
           console.error(error);
-        });
-
+        })
     }
   }, [cart, dispatch]); 
+
+  const handleDelete = (id) => {
+    if (window.confirm('Are you sure you want to delete this Product?')) {
+      dispatch(deleteProduct(id));
+    }
+  }
+
+  const navigate = useNavigate();
 
   return (
     <>
       <div>
         <HeaderLayout></HeaderLayout>
-        <h2><b>Shopping Cart</b></h2>
+        <h2><b>Shopping Cart {id}</b></h2>
+        <Button color="primary" onClick={() => navigate(`/admin/carts/cart-list`)}>Go back to Cart List</Button>
         <Table>
           <thead>
             <tr>
@@ -53,8 +63,13 @@ export const CartDetail = () => {
           </thead>
           <tbody>
             {productDetails.map((product, index) => (
-              // console.log(product),
-              <ProductCart key={index} product={product} quantity={cart.products[index].quantity} />
+              <ProductOfCart
+                key={index}
+                product={product}
+                prodId={product.id}
+                handleDelete={handleDelete} 
+                productQuantity = {cart.products[index].quantity}
+                />
             ))}
           </tbody>
         </Table>

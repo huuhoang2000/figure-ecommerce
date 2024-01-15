@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import TokenCheckLogin from '../../components/TokenCheckLogin';
 import { Input, Form, Button, Label, FormGroup } from 'reactstrap';
 import HeaderLayout from '../../layout/HeaderLayout';
 import FooterLayout from '../../layout/FooterLayout';
@@ -10,6 +9,23 @@ import '../../assets/CSS/mainpage.css';
 import { fetchLoginValidation } from '../../store/slices/login.slice';
 import { fetchUser } from '../../store/slices/user.slice';
 
+
+// export const TokenCheckLogin = () => {
+//   const navigate = useNavigate();
+//   const token = localStorage.getItem('token');
+  
+//   if (token) {
+//     navigate('/mainpage');
+//   }
+  
+//   return null;
+// }
+
+export const TokenCheckLogin = () => {
+  const token = localStorage.getItem('token');
+  return token ? redirect('/mainpage') : null;
+}
+
 function AdminLogin() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -17,12 +33,10 @@ function AdminLogin() {
   const [password, setPassword] = useState('');
 
   useEffect(() => {
-    TokenCheckLogin();
-  }, []);
-
-  useEffect(() => {
     dispatch(fetchUser()); // fetch the users when the component mounts
   }, [dispatch]);
+
+  TokenCheckLogin();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,6 +49,7 @@ function AdminLogin() {
     dispatch(fetchLoginValidation({ username, password }))
   .then((action) => {
     const response = action.payload;
+    console.log(response)
     if (response) {
       alert('You have logged in successfully!');
       //store username in localStorage once login successful

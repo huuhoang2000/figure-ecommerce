@@ -5,17 +5,17 @@
 //   return token ? redirect('/mainpage') : null;
 // }
 
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
-const TokenCheckLogin = () => {
-  const navigate = useNavigate();
-  const token = localStorage.getItem('token');
+// const TokenCheckLogin = () => {
+//   const navigate = useNavigate();
+//   const token = localStorage.getItem('token');
   
-  if (token) {
-    navigate('/mainpage');
-  }
+//   if (token) {
+//     navigate('/mainpage');
+//   }
   
-  return null;
-}
+//   return null;
+// }
 
-export default TokenCheckLogin;
+// export default TokenCheckLogin;

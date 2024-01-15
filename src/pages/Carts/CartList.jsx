@@ -44,7 +44,7 @@ const CartList = () => {
                   
                   <td><b>{cart.id}</b></td>
                   <td><b>{cart.userId}</b></td>
-                  <td><b>{cart.date}</b></td>
+                  <td><b>{new Date(cart.date).toLocaleDateString('en-CA')}</b></td>
                   <td>{cart.products && cart.products.map((product) => (
                     <div key={product.productId}>
                       <b>Product Id </b>{product.productId}

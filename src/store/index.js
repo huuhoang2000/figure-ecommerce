@@ -20,7 +20,7 @@ const store = configureStore({
     carts: cartReducer
   },
   preloadedState,
-  // middleware: [thunk]
+  middleware: [thunk]
 });
 
 export default store;
